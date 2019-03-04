@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue@2.5.17.vue.js"></script>
+  <style>
+    .right,
+    .left {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      font-size: 18px;
+      text-align: center;
+      line-height: 100px;
+    }
+
+    .right {
+      background-color: aqua;
+    }
+
+    .left {
+      background-color: blanchedalmond;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <my-components>
+      hello duyi 1
+      <!-- 命名卡槽：可以规定卡槽在哪里插入  通过在标签里加入 slot=""  在模板语法中的slot 用name引入
+        
+        ，匿名卡槽： 在默认位置插入-->
+      <div class="right" slot="right">right slot</div>
+      hello duyi 2
+      <div class="left" slot="left">left solt</div>
+    </my-components>
+  </div>
+  <script>
+    const myComponents = {
+      template: `
+        <div>
+          <div>
+              hello heima
+          </div>
+            <slot name="right"></slot>
+            <slot name="left"></slot>
+            <div>
+              // <slot></slot>              
+            </div>
+        </div>
+      `,
+    }
+    new Vue({
+      el: "#app",
+      components: {
+        myComponents
+      }
+    })
+
+    /* 
+
+    应用场景： 
+      用父自定义模块时候，用。
+    
+    
+    */
+  </script>
+</body>
+
+</html>

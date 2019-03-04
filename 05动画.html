@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue@2.5.17.vue.js"></script>
+  <style>
+   
+    .show-enter{
+      transform: translateX(-100%);
+    }
+    .show-enter-to{
+      transform: translateX(0);
+    }
+   
+    .show-leave{
+      transform: translateX(0);
+    }
+    .show-leave-to{
+      transform: translateX(-100%);
+    }
+    .show-leave-active, .show-enter-active{
+      transition: all 1s ease-in;
+    }
+    /* 
+    没加name属性的开头
+    .v-leave { } */
+  </style>
+</head>
+<body>
+  <div id="app" class="dome">
+    <!-- 
+      不给transition加name 默认在样式添加 v- 开头,添加了name就要以那个name值开头
+     -->
+      <transition name="show">
+        <p v-if="flag">aaaaa</p>
+      </transition>
+      <button @click="flag = !flag">liu</button>
+    </div>
+  <script>
+      new Vue({
+        el:"#app",
+        data: {
+          flag: true
+        }
+      })
+  </script>
+</body>
+</html>

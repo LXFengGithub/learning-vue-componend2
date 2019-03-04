@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="" id="app">
+    <login>
+      <!-- scope 是一个变量 这个变量会添加 传递过来的数据作为参数 -->
+      <template scope="scope">
+        <p>{{scope.item.content}}</p>
+        <p>{{scope.item}}</p>
+      </template>
+    </login>
+  </div>
+
+  <script src="../vue@2.5.17.vue.js"></script>
+  <script>
+    // 在自己的组件内拿数据，放到 template模板 中去
+    const login = {
+      template: ` <div>
+                     <div v-for="item in list">
+                        <slot :item="item"></slot>
+                      </div>
+                  </div>
+      `,
+      data: () => ({
+        list: [{
+            content: '11112222'
+          },
+          {
+            content: '1111'
+          },
+          {
+            content: '2222'
+          }
+        ]
+      })
+    }
+
+    Vue.component('login', login)
+
+    new Vue({
+      el: '#app',
+      data: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>

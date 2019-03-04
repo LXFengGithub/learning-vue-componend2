@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue@2.5.17.vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <my-components :lists="lists">
+      <!-- 作用域插槽 通过设置slot-scope=""  就相当于一个对象了。就可以通过设定的名字引用里面的数据
+      插槽可以控制html模板的显示与不显示。作用域插槽其实就是带数据的插槽。
+
+      原来父组件可以通过绑定数据传递给子组件。作用域插槽就可以通过子组件绑定数据传递给父组件。
+
+      slot-scope就相当于是一个对象，这个对象里面的数据就是子组件插槽绑定传上来了。
+
+      在vue 2.5.0+ slot-scope不再限制在<template>元素上使用，而可以用在插槽内的任何元素或组件上。
+-->
+      <li slot-scope="prop">{{prop.list.title}}</li>
+    </my-components>
+  </div>
+  <script>
+    // 同过 props 获取父组件的数据 渲染到 template模板中去
+    const myComponents = {
+      template: `
+        <div>
+            <div>
+              <ul>
+                
+                 <slot v-for="list in lists" :list="list">{{list.title}}</slot>
+              </ul>
+           </div> 
+        </div>
+      `,
+      props: ['lists']
+    }
+    new Vue({
+      el: "#app",
+      components: {
+        myComponents
+      },
+      data: {
+        lists: [
+         {title: "吃饭"},
+         {title: "睡觉"},
+         {title: "打豆豆"}
+        ]
+      }
+      
+    })
+  </script>
+</body>
+
+</html>

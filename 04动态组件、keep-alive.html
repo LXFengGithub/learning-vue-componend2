@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue@2.5.17.vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 动态组件 <component :is="componentId"></component>   -->
+    <!-- <keep-alive> 会在一次创建的时候缓存下来，不会让动态组件来回切换的时候重复渲染 -->
+    <keep-alive>
+      <component :is="componentId"></component>      
+    </keep-alive>
+    <button @click="componentId = 'userName'">userName</button>
+    <button @click="componentId = 'passWord'">passWord</button>
+  </div>
+
+  <script>
+    const userName = {
+      template: `
+        <div>
+          userName: <input type="text">
+        </div>
+      `
+    }
+    const passWord = {
+      template: `
+        <div>
+          passWord: <input type="text">
+        </div>
+      `
+    }
+    new Vue({
+      el: "#app",
+      components:{
+        userName,
+        passWord
+      },
+      data: {
+        componentId: 'userName'
+      }
+    })
+  
+  </script>
+</body>
+</html>

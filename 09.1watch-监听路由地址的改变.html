@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+  <style>
+    
+    .mui-active {
+      background-color: #f40;
+      /* height: 45px; */
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="app">
+    <router-link to="/login">login</router-link>
+    <router-link to="/reg">reg</router-link>
+    <transition name="custom-classes-transition" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+      <router-view></router-view>
+    </transition>
+
+  </div>
+
+  <script src="../vue@2.5.17.vue.js"></script>
+  <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+  <script>
+    const login = {
+      template: "<h1>login----{{id}}----{{name}}</h1>",
+      data: () => ({
+        id: '',
+        name: '',
+      }),
+      created() {
+        // query  params  2种方式的定义路由
+        this.id = this.$route.query.id
+        this.name = this.$route.query.name
+      },
+      
+    }
+    const reg = {
+      template: '<h1>reg---{{id}}----{{name}}</h1>',
+      data: () => ({
+        id: '',
+        name: ''
+      }),
+      created() {
+        this.id = this.$route.params.id
+        this.name = this.$route.params.name
+      },
+    }
+
+    const router = new VueRouter({
+      routes: [{
+          path: '/login',
+          component: login
+        },
+        {
+          path: '/reg',
+          component: reg
+        }
+      ],
+      // 指定类样式  --- 第二种 设置类样式
+      linkActiveClass: 'mui-active'
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+      },
+      router,
+      watch: {
+        '$route.path': function(newVal, oldVal) {
+          if(newVal === '/login') {
+            console.log('欢迎进入登录页面')
+          }else if(newVal === '/reg'){
+            console.log('欢迎进入注册页面')
+          }
+        }
+      },
+      components: {
+        // 模板挂载
+        login,
+        reg
+      },
+
+
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model='firstName'>
+    <input type="button" value="-">
+    <input type="text" v-model='lastName'>
+    <input type="button" value="=">
+    <input type="text" v-model='fullName'>
+  </div>
+  <script src="../vue@2.5.17.vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          firstName: '',
+          lastName: '',
+          fullName: ''
+        }
+      },
+      // 特点： 操作一些非dom标签的时候用，如： 监听路由等，一些虚拟的东西
+      watch: {
+        firstName(newVal, oldVal) {
+          this.fullName = newVal + '-' + this.firstName
+        },
+        lastName(newVal, oldVal) {
+          this.fullName = newVal + '-' + this.lastName
+        }
+      }
+
+    })
+
+  </script>
+</body>
+
+</html>
